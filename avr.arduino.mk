@@ -40,6 +40,8 @@ CFLAGS+=	${__ARD_LIB_DIRS:S/^/-I/}
 __ARD_LIBS=	${USE_ARDUINO:S/^/lib/}
 OBJDIRS+=	${__ARD_LIBS}
 ARDUINO_LIBS=	${__ARD_LIBS:S/$/.a/}
+
+LIBS+=          ${ARDUINO_LIBS}
 CLEANFILES+=	${ARDUINO_LIBS}
 
 .for l in ${__ARD_LIBS}
@@ -55,10 +57,6 @@ CLEANFILES+=	${SRCS:M*.ino:S/.ino$/.cpp/}
 .ino.cpp:
 	echo "#include <Arduino.h>" >${.TARGET}
 	cat ${.IMPSRC} >>${.TARGET}
-
-.ifdef PROG
-${PROG}: ${ARDUINO_LIBS}
-.endif
 
 .for l in ${__ARD_LIBS}
 .  for s in ${${l}_SRCS}

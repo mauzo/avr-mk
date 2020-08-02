@@ -52,7 +52,7 @@ all:	${PROG}
 .include "avr.dep.mk"
 .include "avr.rules.mk"
 
-${PROG}: ${OBJS}
-	${LD} ${LDFLAGS} -o ${.TARGET} ${.ALLSRC} ${LIBS}
+${PROG}: ${OBJS} ${LIBS}
+	${LD} ${LDFLAGS} -o ${.TARGET} ${.ALLSRC}
 
 .endif
