@@ -3,7 +3,7 @@ __<avr.mk>__:
 
 AVR_MK_DIR:=    ${.PARSEDIR}
 
-.PATH:          ${AVR_MK_DIR}/mk
+.MAKEFLAGS:     -m${AVR_MK_DIR}/mk
 
 TARGET?=	avr
 .include "avr.obj.init.mk"
