@@ -1,7 +1,9 @@
 .if !target(__<avr.mk>__)
 __<avr.mk>__:
 
-.PATH: ${.CURDIR}/mk
+AVR_MK_DIR:=    ${.PARSEDIR}
+
+.PATH:          ${AVR_MK_DIR}/mk
 
 TARGET?=	avr
 .include "avr.obj.init.mk"

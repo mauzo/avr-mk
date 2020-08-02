@@ -25,12 +25,11 @@ LD?=	${CC}
 
 .PHONY:	all .all.usage upload tty test
 
-#all:	.all.usage
-all:	${PROG}
+all:	.all.usage
 
 .all.usage: ${PROG}
 	${OBJDUMP} -h ${.ALLSRC} | \
-	${PERL} ${.CURDIR}/script/show_usage \
+	${PERL} ${AVR_MK_DIR}/script/show_usage \
 		${AVAIL_FLASH} ${AVAIL_SRAM} ${AVAIL_EEPROM}
 
 upload:	all
