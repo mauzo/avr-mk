@@ -11,9 +11,11 @@ while (<STDIN>) {
     /\.([a-z_]+)[ ]+([0-9a-f]+)/ and $s{$1} = hex $2;
 }
 
+$s{$_} //= 0 for qw/text data bss eeprom/;
+
 my $f = $s{text} + $s{data};
 my $r = $s{data} + $s{bss};
-my $e = $s{eeprom} // 0;
+my $e = $s{eeprom};
 
 print "\nStatic memory usage:\n";
 printf "  flash %uB (%.1f%%); sram %uB (%.1f%%); eeprom %uB (%.1f%%)\n\n",
