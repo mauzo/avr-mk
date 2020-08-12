@@ -10,15 +10,15 @@ __<avr.rules.mk>__:
 	${CXX} ${CXXFLAGS} -c -o ${.TARGET} ${.IMPSRC}
 
 .c.i:
-	${CC} ${CFLAGS} -E ${.IMPSRC} >${.TARGET}
+	${CC} ${CFLAGS} -E ${.IMPSRC} >${.CURDIR}/${.TARGET}
 
 .cpp.ii:
-	${CXX} ${CXXFLAGS} -E ${.IMPSRC} >${.TARGET}
+	${CXX} ${CXXFLAGS} -E ${.IMPSRC} >${.CURDIR}/${.TARGET}
 
 .c.s:
-	${CC} ${CFLAGS} -S ${.IMPSRC} >${.TARGET}
+	${CC} ${CFLAGS} -S ${.IMPSRC} -o ${.CURDIR}/${.TARGET}
 
 .cpp.s:
-	${CXX} ${CXXFLAGS} -S ${.IMPSRC} >${.TARGET}
+	${CXX} ${CXXFLAGS} -S ${.IMPSRC} -o ${.CURDIR}/${.TARGET}
 
 .endif
