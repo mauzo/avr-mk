@@ -44,6 +44,10 @@ ARDUINO_LIBS=	${__ARD_LIBS:S/$/.a/}
 LIBS+=          ${ARDUINO_LIBS}
 CLEANFILES+=	${ARDUINO_LIBS}
 
+.ifdef(PROG)
+PROG:	${ARDUINO_LIBS}
+.endif
+
 .for l in ${__ARD_LIBS}
 .  for s in ${${l}_SRCS}
 CLEANFILES+=	${l}/${s:R}.o ${l}/${s}
