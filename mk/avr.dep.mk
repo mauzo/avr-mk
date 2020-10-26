@@ -10,13 +10,13 @@ depend: ${DEPENDFILE}
 ${DEPENDFILE}: ${SRCS} ${.MAKE.MAKEFILES}
 	echo >${.TARGET}
 .for s in ${SRCS:M*.c}
-	${CC} ${CFLAGS} -MM -MQ ${s:R}.o ${${s}:P} >>${.TARGET}
+	${CC} ${CFLAGS} -MM -MG -MQ ${s:R}.o ${${s}:P} >>${.TARGET}
 .endfor
 .for s in ${SRCS:M*.cpp}
-	${CXX} ${CXXFLAGS} -MM -MQ ${s:R}.o ${${s}:P} >>${.TARGET}
+	${CXX} ${CXXFLAGS} -MM -MG -MQ ${s:R}.o ${${s}:P} >>${.TARGET}
 .endfor
 .for s in ${SRCS:M*.ino}
-	${CXX} ${CXXFLAGS} -MM -MQ ${s:R}.o -x c++ ${${s}:P} >>${.TARGET}
+	${CXX} ${CXXFLAGS} -MM -MG -MQ ${s:R}.o -x c++ ${${s}:P} >>${.TARGET}
 .endfor
 
 cleandepend:
