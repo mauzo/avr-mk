@@ -7,17 +7,17 @@ DEPENDFILE=	${.OBJDIR}/.depend
 
 depend: ${DEPENDFILE}
 
-${DEPENDFILE}: ${SRCS}
+${DEPENDFILE}: ${SRCS} ${.MAKE.MAKEFILES}
 	echo >${.TARGET}
-.if !empty(SRCS:M*.c)
-	${CC} -MM ${CFLAGS} ${.ALLSRC:M*.c} >>${.TARGET}
-.endif
-.if !empty(SRCS:M*.cpp)
-	${CXX} -MM ${CXXFLAGS} ${.ALLSRC:M*.cpp} >>${.TARGET}
-.endif
-.if !empty(SRCS:M*.ino)
-	${CXX} -MM ${CXXFLAGS} -x c++ ${.ALLSRC:M*.ino} >>${.TARGET}
-.endif
+.for s in ${SRCS:M*.c}
+	${CC} ${CFLAGS} -MM -MQ ${s:R}.o ${${s}:P} >>${.TARGET}
+.endfor
+.for s in ${SRCS:M*.cpp}
+	${CXX} ${CXXFLAGS} -MM -MQ ${s:R}.o ${${s}:P} >>${.TARGET}
+.endfor
+.for s in ${SRCS:M*.ino}
+	${CXX} ${CXXFLAGS} -MM -MQ ${s:R}.o -x c++ ${${s}:P} >>${.TARGET}
+.endfor
 
 cleandepend:
 	rm -f ${DEPENDFILE}
